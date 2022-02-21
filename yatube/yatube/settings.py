@@ -150,3 +150,5 @@ CACHES = {
         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
     }
 }
+
+NUM_POSTS: int = 10

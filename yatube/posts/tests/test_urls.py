@@ -19,7 +19,6 @@ class PostsUrlTest(TestCase):
             text='Тестовый текст',
             author=cls.user,
             group=cls.group,
-            id=1,
         )
         cls.url_index = ('/', 'posts/index.html',)
         cls.url_profile = (
@@ -81,7 +80,7 @@ class PostsUrlTest(TestCase):
             follow=True
         )
         self.assertRedirects(
-            response, '/auth/login/?next=/create/')
+            response, f'/auth/login/?next={PostsUrlTest.url_create[0]}')
 
     def test_posts_edit_url_redirect_anonymous_on_auth_login(self):
         """Страница /edit/ перенаправит анонимного пользователя
@@ -89,11 +88,11 @@ class PostsUrlTest(TestCase):
         """
         response = self.guest_client.get(PostsUrlTest.url_edit[0], follow=True)
         self.assertRedirects(
-            response, '/auth/login/?next=/posts/1/edit/')
+            response, f'/auth/login/?next={PostsUrlTest.url_edit[0]}')
 
     def test_posts_edit_redirect_is_not_author_on_posts_1(self):
-        """Страница posts/1/edit/ перенаправит неавтора поста
-        на страницу posts/1/.
+        """Страница /edit/ перенаправит неавтора поста
+        на страницу этого поста.
         """
         self.user_another = User.objects.create_user(username='another')
         self.authorized_client_another = Client()
@@ -101,7 +100,7 @@ class PostsUrlTest(TestCase):
         response = self.authorized_client_another.get(
             PostsUrlTest.url_edit[0], follow=True)
         self.assertRedirects(
-            response, '/posts/1/')
+            response, PostsUrlTest.url_posts[0])
 
     def test_posts_urls_uses_correct_template(self):
         """URL-адрес приложения posts использует соответствующий шаблон."""
@@ -127,5 +126,5 @@ class PostsUrlTest(TestCase):
             follow=True
         )
         self.assertRedirects(
-            response, '/auth/login/?next=/posts/1/comment/'
+            response, f'/auth/login/?next={PostsUrlTest.url_comment[0]}'
         )

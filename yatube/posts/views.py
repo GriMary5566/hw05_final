@@ -1,22 +1,9 @@
 from django.contrib.auth.decorators import login_required
-from django.core.paginator import Paginator
-from django.db.models import QuerySet
 from django.shortcuts import get_object_or_404, redirect, render
 
 from .forms import CommentForm, PostForm
 from .models import Follow, Group, Post, User
-
-NUM_POSTS: int = 10
-
-
-def get_page_obj(
-    page_number: int,
-    post_list: QuerySet,
-    num_posts: int = NUM_POSTS
-) -> Post:
-    paginator: Paginator = Paginator(post_list, num_posts)
-    page_obj: Post = paginator.get_page(page_number)
-    return page_obj
+from .utils import get_page_obj
 
 
 def index(request):
@@ -25,8 +12,9 @@ def index(request):
     post_list = Post.objects.select_related('group', 'author')
     page_number = request.GET.get('page')
     page_obj = get_page_obj(page_number, post_list)
+    index = True
 
-    context = {'page_obj': page_obj}
+    context = {'page_obj': page_obj, 'index': index}
     return render(request, template, context)
 
 
@@ -55,7 +43,7 @@ def profile(request, username):
     if not request.user.is_authenticated:
         following = None
     else:
-        following = author.following.filter(user=request.user)
+        following = author.following.filter(user=request.user).exists()
 
     context = {
         'author': author,
@@ -162,8 +150,9 @@ def follow_index(request):
     )
     page_number = request.GET.get('page')
     page_obj = get_page_obj(page_number, post_list)
+    follow = True
 
-    context = {'page_obj': page_obj}
+    context = {'page_obj': page_obj, 'follow': follow}
     return render(request, template, context)
 
 
