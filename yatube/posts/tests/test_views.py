@@ -311,9 +311,9 @@ class PostsPagesTest(TestCase):
         на других пользователей.
         """
         initial_num_follow = Follow.objects.filter(
-                user=self.follower,
-                author=self.user,
-            ).count()
+            user=self.follower,
+            author=self.user,
+        ).count()
         self.response = self.authorized_follower.get(
             reverse(
                 self.profile_follow_url[0],
@@ -321,9 +321,9 @@ class PostsPagesTest(TestCase):
             )
         )
         expected_num_follow = Follow.objects.filter(
-                user=self.follower,
-                author=self.user,
-            ).count()
+            user=self.follower,
+            author=self.user,
+        ).count()
         print(expected_num_follow)
         self.assertEqual(expected_num_follow, initial_num_follow + 1)
 
@@ -333,9 +333,9 @@ class PostsPagesTest(TestCase):
         """
         Follow.objects.create(user=self.follower, author=self.user)
         initial_num_follow = Follow.objects.filter(
-                user=self.follower,
-                author=self.user,
-            ).count()
+            user=self.follower,
+            author=self.user,
+        ).count()
         self.response = self.authorized_follower.get(
             reverse(
                 self.profile_unfollow_url[0],
@@ -343,9 +343,9 @@ class PostsPagesTest(TestCase):
             )
         )
         expected_num_follow = Follow.objects.filter(
-                user=self.follower,
-                author=self.user,
-            ).count()
+            user=self.follower,
+            author=self.user,
+        ).count()
         self.assertEqual(expected_num_follow, initial_num_follow - 1)
 
     def test_follow_index_new_post_is_correct_visible(self):
