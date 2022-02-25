@@ -324,7 +324,6 @@ class PostsPagesTest(TestCase):
             user=self.follower,
             author=self.user,
         ).count()
-        print(expected_num_follow)
         self.assertEqual(expected_num_follow, initial_num_follow + 1)
 
     def test_authorized_client_can_unfollow(self):
