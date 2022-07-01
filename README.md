@@ -1,3 +1,123 @@
-# hw05_final
+# Социальная сеть блогеров
+### Описание
 
-[![CI](https://github.com/yandex-praktikum/hw05_final/actions/workflows/python-app.yml/badge.svg?branch=master)](https://github.com/yandex-praktikum/hw05_final/actions/workflows/python-app.yml)
+Благодаря этому проекту можно опубликовать свой личный дневник, поделиться мыслями на самые разные темы, почитать публикации других авторов, оставить комментарий на прочитанную публикацию, подписаться на авторов понравившихся постов.
+
+### Технологии
+
+Python 3.7
+
+Django 2.2.19
+
+### Как запустить проект:
+
+Клонировать репозиторий и перейти в него в командной строке:
+
+```
+
+git clone git@github.com:GriMary5566/hw05_final.git
+
+```
+
+```
+
+cd hw05_final/
+
+```
+
+  
+
+  
+
+Cоздать и активировать виртуальное окружение:
+
+  
+
+  
+
+```
+
+python3 -m venv venv
+
+```
+
+  
+
+```
+
+source venv/bin/activate
+
+```
+
+  
+
+```
+
+python3 -m pip install --upgrade pip
+
+```
+
+  
+
+  
+
+Установить зависимости из файла requirements.txt:
+
+  
+
+  
+
+```
+
+pip install -r requirements.txt
+
+```
+
+  
+
+  
+
+Перейти в папку yatube_api:
+
+  
+
+  
+
+```
+
+cd yatube/
+
+```
+
+  
+
+  
+
+Выполнить миграции:
+
+  
+
+  
+
+```
+
+python3 manage.py migrate
+
+```
+  
+
+  
+
+Запустить проект:
+
+  
+
+  
+
+```
+
+python3 manage.py runserver
+
+```
+### Авторы
+Команда Яндекс.Практикум, Мария Григорьева
